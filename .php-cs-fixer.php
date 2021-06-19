@@ -20,6 +20,7 @@ return $config
         'full_opening_tag' => true,
         'function_declaration' => true,
         'heredoc_indentation' => true,
+        'indentation_type' => true,
         'line_ending' => true,
         'list_syntax' => true,
         'lowercase_cast' => true,

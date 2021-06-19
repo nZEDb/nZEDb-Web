@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 /**
@@ -14,6 +15,7 @@ declare(strict_types=1);
  * @since         3.0.4
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
+
 namespace App\View;
 
 /**
@@ -23,24 +25,24 @@ namespace App\View;
  */
 class AjaxView extends AppView
 {
-    /**
-     * The name of the layout file to render the view inside of. The name
-     * specified is the filename of the layout in /templates/Layout without
-     * the .php extension.
-     *
-     * @var string
-     */
-    public $layout = 'ajax';
+	/**
+	 * The name of the layout file to render the view inside of. The name
+	 * specified is the filename of the layout in /templates/Layout without
+	 * the .php extension.
+	 *
+	 * @var string
+	 */
+	public $layout = 'ajax';
 
-    /**
-     * Initialization hook method.
-     *
-     * @return void
-     */
-    public function initialize(): void
-    {
-        parent::initialize();
+	/**
+	 * Initialization hook method.
+	 *
+	 * @return void
+	 */
+	public function initialize(): void
+	{
+		parent::initialize();
 
-        $this->response = $this->response->withType('ajax');
-    }
+		$this->response = $this->response->withType('ajax');
+	}
 }

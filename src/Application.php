@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 /**
@@ -14,6 +15,7 @@ declare(strict_types=1);
  * @since     3.3.0
  * @license   https://opensource.org/licenses/mit-license.php MIT License
  */
+
 namespace App;
 
 use Cake\Core\Configure;
@@ -37,45 +39,45 @@ use Cake\Routing\Middleware\RoutingMiddleware;
  */
 class Application extends BaseApplication
 {
-    /**
-     * Load all the application configuration and bootstrap logic.
-     *
-     * @return void
-     */
-    public function bootstrap(): void
-    {
-        // Call parent to load bootstrap from files.
-        parent::bootstrap();
+	/**
+	 * Load all the application configuration and bootstrap logic.
+	 *
+	 * @return void
+	 */
+	public function bootstrap(): void
+	{
+		// Call parent to load bootstrap from files.
+		parent::bootstrap();
 
-        if (PHP_SAPI === 'cli') {
-            $this->bootstrapCli();
-        } else {
-            FactoryLocator::add(
-                'Table',
-                (new TableLocator())->allowFallbackClass(false)
-            );
-        }
+		if (PHP_SAPI === 'cli') {
+			$this->bootstrapCli();
+		} else {
+			FactoryLocator::add(
+				'Table',
+				(new TableLocator())->allowFallbackClass(false)
+			);
+		}
 
-        /*
-         * Only try to load DebugKit in development mode
-         * Debug Kit should not be installed on a production system
-         */
-        if (Configure::read('debug')) {
-            $this->addPlugin('DebugKit');
-        }
+		/*
+		 * Only try to load DebugKit in development mode
+		 * Debug Kit should not be installed on a production system
+		 */
+		if (Configure::read('debug')) {
+			$this->addPlugin('DebugKit');
+		}
 
-        // Load more plugins here
-    }
+		// Load more plugins here
+	}
 
-    /**
-     * Setup the middleware queue your application will use.
-     *
-     * @param \Cake\Http\MiddlewareQueue $middlewareQueue The middleware queue to setup.
-     * @return \Cake\Http\MiddlewareQueue The updated middleware queue.
-     */
-    public function middleware(MiddlewareQueue $middlewareQueue): MiddlewareQueue
-    {
-        $middlewareQueue
+	/**
+	 * Setup the middleware queue your application will use.
+	 *
+	 * @param \Cake\Http\MiddlewareQueue $middlewareQueue The middleware queue to setup.
+	 * @return \Cake\Http\MiddlewareQueue The updated middleware queue.
+	 */
+	public function middleware(MiddlewareQueue $middlewareQueue): MiddlewareQueue
+	{
+		$middlewareQueue
             // Catch any exceptions in the lower layers,
             // and make an error page/response
             ->add(new ErrorHandlerMiddleware(Configure::read('Error')))
@@ -104,37 +106,37 @@ class Application extends BaseApplication
                 'httponly' => true,
             ]));
 
-        return $middlewareQueue;
-    }
+		return $middlewareQueue;
+	}
 
-    /**
-     * Register application container services.
-     *
-     * @param \Cake\Core\ContainerInterface $container The Container to update.
-     * @return void
-     * @link https://book.cakephp.org/4/en/development/dependency-injection.html#dependency-injection
-     */
-    public function services(ContainerInterface $container): void
-    {
-    }
+	/**
+	 * Register application container services.
+	 *
+	 * @param \Cake\Core\ContainerInterface $container The Container to update.
+	 * @return void
+	 * @link https://book.cakephp.org/4/en/development/dependency-injection.html#dependency-injection
+	 */
+	public function services(ContainerInterface $container): void
+	{
+	}
 
-    /**
-     * Bootstrapping for CLI application.
-     *
-     * That is when running commands.
-     *
-     * @return void
-     */
-    protected function bootstrapCli(): void
-    {
-        try {
-            $this->addPlugin('Bake');
-        } catch (MissingPluginException $e) {
-            // Do not halt if the plugin is missing
-        }
+	/**
+	 * Bootstrapping for CLI application.
+	 *
+	 * That is when running commands.
+	 *
+	 * @return void
+	 */
+	protected function bootstrapCli(): void
+	{
+		try {
+			$this->addPlugin('Bake');
+		} catch (MissingPluginException $e) {
+			// Do not halt if the plugin is missing
+		}
 
-        $this->addPlugin('Migrations');
+		$this->addPlugin('Migrations');
 
-        // Load more plugins here
-    }
+		// Load more plugins here
+	}
 }

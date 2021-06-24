@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+git flow init -d
+
+git config core.bare=false
+git config core.eol=lf
+git config core.filemode=true
+git config core.ignorecase=false
+git config core.logallrefupdates=true
+git config core.repositoryformatversion=0
+
+git config gitflow.branch.master=main
+git config gitflow.branch.develop=develop
+git config gitflow.prefix.bugfix=bugfix-
+git config gitflow.prefix.feature=feature-
+git config gitflow.prefix.release=release-
+git config gitflow.prefix.hotfix=hotfix-
+git config gitflow.prefix.support=support-
+git config gitflow.prefix.versiontag "v"
+
+
+CWD=`pwd`
+git config gitflow.path.hooks=${CWD/%dev}.git/hooks

@@ -69,6 +69,15 @@ class Installer
 		if (class_exists($class)) {
 			$class::customizeCodeceptionBinary($event);
 		}
+
+		if ($event->isDevMode()) {
+			$cmd = "$rootDir/dev/setup";
+			$output = trim(shell_exec("$cmd 2>&1"));
+			if ($output !== "") {
+				echo "> " . $cmd . "\n";
+				echo $output;
+			}
+		}
 	}
 
 	/**
